@@ -38,7 +38,7 @@ export function generateTranscript(duration: number, voiceMarks: VoiceMark[]): T
   return segments
 }
 
-export function generateSummary(transcript: TranscriptSegment[], template: Template | null): {
+export function generateSummary(_transcript: TranscriptSegment[], template: Template | null): {
   summary: string
   actionItems: string[]
 } {
