@@ -58,8 +58,8 @@ A feature-rich clone of HiNotes by HiDock - an AI-powered note-taking applicatio
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/hinotes-clone.git
-cd hinotes-clone
+git clone https://github.com/kdmjumper82/parts-notes.git
+cd parts-notes
 ```
 
 2. Install dependencies:
