@@ -13,6 +13,12 @@ export interface TranscriptSegment {
   isHighlight?: boolean;
 }
 
+export interface DetailedSummary {
+  summary: string;
+  outline: string[];
+  keyInformation: string[];
+}
+
 export interface Note {
   id: string;
   title: string;
@@ -22,9 +28,20 @@ export interface Note {
   transcript: TranscriptSegment[];
   voiceMarks: VoiceMark[];
   summary?: string;
+  detailedSummary?: DetailedSummary;
   actionItems?: string[];
   template?: string;
 }
+
+export type AIEngine = 'chatgpt-4o' | 'claude-3.5';
+
+export type MeetingTemplate =
+  | 'General Meeting'
+  | 'Team Meeting'
+  | 'Client Meeting'
+  | 'One-on-One Meeting'
+  | 'Project Kickoff Meeting'
+  | 'Retrospective Meeting';
 
 export interface Template {
   id: string;

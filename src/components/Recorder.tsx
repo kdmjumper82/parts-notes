@@ -11,7 +11,7 @@ interface RecorderProps {
 
 export default function Recorder({ onSave, onCancel }: RecorderProps) {
   const [isRecording, setIsRecording] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
+  // const [isPaused, setIsPaused] = useState(false) // Reserved for future pause functionality
   const [recordingTime, setRecordingTime] = useState(0)
   const [voiceMarks, setVoiceMarks] = useState<VoiceMark[]>([])
   const [currentMarkNote, setCurrentMarkNote] = useState('')

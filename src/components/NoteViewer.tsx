@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
-import { ArrowLeft, Download, Play, Pause, Bookmark, FileText, CheckSquare, Edit2, Save, X } from 'lucide-react'
-import { Note } from '../types'
+import { ArrowLeft, Download, Play, Pause, Bookmark, FileText, CheckSquare, Edit2, Save, X, Sparkles } from 'lucide-react'
+import { Note, AIEngine, MeetingTemplate } from '../types'
 import { exportToPDF, exportToTXT, exportToCSV } from '../utils/export'
 
 interface NoteViewerProps {
@@ -14,6 +14,9 @@ export default function NoteViewer({ note, onBack, onUpdate }: NoteViewerProps) 
   const [currentTime, setCurrentTime] = useState(0)
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [editedTitle, setEditedTitle] = useState(note.title)
+  const [selectedAIEngine, setSelectedAIEngine] = useState<AIEngine>('chatgpt-4o')
+  const [selectedTemplate, setSelectedTemplate] = useState<MeetingTemplate>('General Meeting')
+  const [isGeneratingSummary, setIsGeneratingSummary] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
@@ -77,6 +80,53 @@ export default function NoteViewer({ note, onBack, onUpdate }: NoteViewerProps) 
         break
     }
   }
+
+  const handleGenerateSummary = async () => {
+    setIsGeneratingSummary(true)
+
+    // Simulate AI summary generation
+    // In a real implementation, this would call an AI API
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000))
+
+      const mockDetailedSummary = {
+        summary: `The meeting covered the success of DRX 9000 decompression therapy, plans to hire new Customer Service Representatives (CSRs) by the end of February, and updates on system implementations and improvements. Discussions included enhancing client engagement, particularly in the dental sector, refining internal processes, and addressing specific client issues. Creative content planning and adjustments to training operations were also highlighted.`,
+        outline: [
+          'Therapy Success Testimonial - Speaker 1 shared personal success with DRX 9000 decompression therapy, highlighting significant pain relief and lifestyle improvements.',
+          'Client Engagement and Therapy Benefits - Discussion on the importance of helping clients regain quality of life. Emphasis on the role of service providers in improving clients\' well-being.',
+          'Hiring and System Expansion Plans - February marked as a crucial month for hiring new CSRs. Plans to increase sales call capacity from six to potentially 30 calls per week. Rebuilding and redeveloping internal and external processes for efficiency.',
+          'Client System and Calendar Updates - Rolling out new client systems and calendars for scheduling appointments. Introduction of a general calendar for streamlined booking across different time zones.',
+          'Internal Process Improvements - Implementation of notes integration with Slack and other internal systems. Adjustments to call abandonment policies to enhance client service.',
+          'Creative Content and Training Enhancements - Development of new training systems to onboard CSR efficiently. Focus on creating consistent and simple training materials to expedite learning.',
+          'Client Management and Performance Monitoring - Review of current client statuses, lead generation, and scheduling effectiveness. Specific client feedback and performance metrics discussed for improvement.'
+        ],
+        keyInformation: [
+          'Therapy success with DRX 9000 mentioned to occur within two weeks to two months.',
+          'February is a key month for hiring and system rollout.',
+          'Calendar updates to include time slots from 7 a.m. to 8 p.m. in 15-minute increments.',
+          'Issues with client payment and scheduling systems noted.'
+        ]
+      }
+
+      onUpdate({
+        ...note,
+        detailedSummary: mockDetailedSummary
+      })
+    } catch (error) {
+      console.error('Error generating summary:', error)
+    } finally {
+      setIsGeneratingSummary(false)
+    }
+  }
+
+  const meetingTemplates: { value: MeetingTemplate; label: string; icon: string }[] = [
+    { value: 'General Meeting', label: 'General Meeting', icon: '💬' },
+    { value: 'Team Meeting', label: 'Team Meeting', icon: '🫱' },
+    { value: 'Client Meeting', label: 'Client Meeting', icon: '💼' },
+    { value: 'One-on-One Meeting', label: 'One-on-One Meeting', icon: '👥' },
+    { value: 'Project Kickoff Meeting', label: 'Project Kickoff Meeting', icon: '🚀' },
+    { value: 'Retrospective Meeting', label: 'Retrospective Meeting', icon: '🔄' },
+  ]
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -200,7 +250,7 @@ export default function NoteViewer({ note, onBack, onUpdate }: NoteViewerProps) 
         )}
 
         <div className="p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div className="lg:col-span-2 space-y-6">
               {note.summary && (
                 <div>
@@ -289,6 +339,152 @@ export default function NoteViewer({ note, onBack, onUpdate }: NoteViewerProps) 
                 </div>
               </div>
             )}
+
+            {/* Summary Panel */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-6">
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 p-6">
+                  {!note.detailedSummary ? (
+                    <>
+                      <h3 className="text-lg text-slate-300 mb-6">
+                        You can customize your own summary
+                      </h3>
+
+                      {/* AI Engine Selection */}
+                      <div className="mb-6">
+                        <h4 className="text-sm font-medium text-slate-400 mb-3">AI Engine:</h4>
+                        <div className="space-y-2">
+                          <label className="flex items-center gap-3 cursor-pointer">
+                            <input
+                              type="radio"
+                              name="ai-engine"
+                              value="chatgpt-4o"
+                              checked={selectedAIEngine === 'chatgpt-4o'}
+                              onChange={(e) => setSelectedAIEngine(e.target.value as AIEngine)}
+                              className="w-4 h-4 text-indigo-600"
+                            />
+                            <span className="flex items-center gap-2 text-slate-300">
+                              <span className="text-lg">🤖</span>
+                              ChatGPT-4o
+                            </span>
+                          </label>
+                          <label className="flex items-center gap-3 cursor-pointer">
+                            <input
+                              type="radio"
+                              name="ai-engine"
+                              value="claude-3.5"
+                              checked={selectedAIEngine === 'claude-3.5'}
+                              onChange={(e) => setSelectedAIEngine(e.target.value as AIEngine)}
+                              className="w-4 h-4 text-indigo-600"
+                            />
+                            <span className="flex items-center gap-2 text-slate-300">
+                              <span className="text-lg">🔆</span>
+                              ClaudeAI-3.5
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Template Selection */}
+                      <div className="mb-6">
+                        <h4 className="text-sm font-medium text-slate-400 mb-3">Template:</h4>
+                        <div className="space-y-2">
+                          {meetingTemplates.map((template) => (
+                            <label key={template.value} className="flex items-center gap-3 cursor-pointer">
+                              <input
+                                type="radio"
+                                name="template"
+                                value={template.value}
+                                checked={selectedTemplate === template.value}
+                                onChange={(e) => setSelectedTemplate(e.target.value as MeetingTemplate)}
+                                className="w-4 h-4 text-indigo-600"
+                              />
+                              <span className="flex items-center gap-2 text-slate-300 text-sm">
+                                <span>{template.icon}</span>
+                                {template.label}
+                              </span>
+                              <button className="ml-auto text-slate-500 hover:text-slate-300">
+                                <Edit2 className="w-3 h-3" />
+                              </button>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Generate Button */}
+                      <button
+                        onClick={handleGenerateSummary}
+                        disabled={isGeneratingSummary}
+                        className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 text-white rounded-lg hover:from-cyan-600 hover:to-teal-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isGeneratingSummary ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            Generating...
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles className="w-4 h-4" />
+                            Start to summarize
+                          </>
+                        )}
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      {/* Generated Summary Display */}
+                      <div className="space-y-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="text-lg font-semibold text-white">Summary</h3>
+                          <button
+                            onClick={() => onUpdate({ ...note, detailedSummary: undefined })}
+                            className="text-sm text-slate-400 hover:text-white"
+                          >
+                            Regenerate
+                          </button>
+                        </div>
+
+                        {/* Summary Section */}
+                        <div>
+                          <h4 className="text-sm font-semibold text-white mb-2">Summary:</h4>
+                          <p className="text-sm text-slate-300 leading-relaxed">
+                            {note.detailedSummary.summary}
+                          </p>
+                        </div>
+
+                        {/* Outline Section */}
+                        {note.detailedSummary.outline.length > 0 && (
+                          <div>
+                            <h4 className="text-sm font-semibold text-white mb-2">Outline:</h4>
+                            <ol className="list-decimal list-inside space-y-2 text-sm text-slate-300">
+                              {note.detailedSummary.outline.map((item, idx) => (
+                                <li key={idx} className="leading-relaxed">
+                                  {item}
+                                </li>
+                              ))}
+                            </ol>
+                          </div>
+                        )}
+
+                        {/* Key Information Section */}
+                        {note.detailedSummary.keyInformation.length > 0 && (
+                          <div>
+                            <h4 className="text-sm font-semibold text-white mb-2">Key Information:</h4>
+                            <ol className="list-decimal list-inside space-y-2 text-sm text-slate-300">
+                              {note.detailedSummary.keyInformation.map((item, idx) => (
+                                <li key={idx} className="leading-relaxed">
+                                  {item}
+                                </li>
+                              ))}
+                            </ol>
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
