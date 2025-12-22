@@ -1,58 +1,53 @@
-# HiNotes Clone
+# Endogenous Analysis Dashboard
 
-A feature-rich clone of HiNotes by HiDock - an AI-powered note-taking application with audio recording, transcription, and smart meeting notes generation.
+A Financial Times-inspired dashboard for analyzing endogenous drivers in forex trading. This Next.js application provides a comprehensive view of macroeconomic indicators and their impact on currency valuation using the Endogenous Analysis (Absolute Basis) methodology.
 
-![HiNotes Clone](https://img.shields.io/badge/React-18.2-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue) ![Vite](https://img.shields.io/badge/Vite-5.0-purple)
+![Next.js](https://img.shields.io/badge/Next.js-14.2-black) ![React](https://img.shields.io/badge/React-18.3-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8)
+
+## Overview
+
+This application implements the **Endogenous Analysis** framework used in the **Idea Generation Phase** of forex trading, representing approximately 80% of the analytical work traders perform. The analysis evaluates a country's currency in isolation using the **static or absolute principle**, assessing inflationary or deflationary conditions on a standalone basis.
 
 ## Features
 
-### 🎙️ Audio Recording
-- High-quality audio recording directly from your browser
-- Real-time recording timer
-- Pause and resume functionality
+### 📊 Comprehensive Economic Driver Analysis
+- **Leading Indicators (Surveys)**: ISM Manufacturing/Non-Manufacturing, Consumer Sentiment, Building Permits
+- **Money Supply (M2)**: Federal Reserve monetary lever analysis
+- **Interest Rates**: Fed Funds Rate and policy stance evaluation
+- **Inflation Metrics**: Core CPI and PPI tracking
+- **Employment Data**: Non-Farm Payrolls analysis
+- **Central Authority Actions**: Deficit/GDP, Debt/GDP, Interest Bill, Treasury Rates, Fed Balance Sheet
 
-### 📌 VoiceMark™ Highlights
-- Mark important moments during recording
-- Add notes to specific timestamps
-- Quickly navigate to key points during playback
+### 📈 Interactive Data Visualization
+- Historical trend charts for each driver (24-month view)
+- Overall Endogenous Score trend analysis
+- Real-time score calculations and bias determination
+- Color-coded categories matching Financial Times aesthetic
 
-### 📝 AI-Powered Transcription
-- Automatic transcription generation (simulated)
-- Speaker identification
-- Synchronized audio and text playback
-- Click on any transcript segment to jump to that moment
+### 🎯 Prominent Score Display
+- Overall Endogenous Score with progress indicator
+- Economic condition classification (Inflationary/Deflationary)
+- Currency bias indication (Long/Short/Neutral)
+- Detailed interpretation and analysis summary
 
-### 🎯 Smart Meeting Notes
-- Choose from multiple templates:
-  - Meeting Notes
-  - Lecture Notes
-  - Interview Notes
-  - Brainstorming Session
-- Automatic summary generation
-- Action items extraction
-- Organized by sections
+### 🎨 Financial Times-Inspired Design
+- Minimalist, professional layout
+- FT color palette (salmon pink, cream, navy, burgundy)
+- Typography matching FT style (serif headlines, sans-serif body)
+- Responsive grid layout optimized for vertical stacking
+- Clean, data-focused presentation
 
-### 💾 Export Capabilities
-- **PDF Export**: Professional formatted notes with full transcript
-- **TXT Export**: Plain text format for universal compatibility
-- **CSV Export**: Structured data for analysis and integration
-
-### 🎨 Modern UI/UX
-- Beautiful gradient design with dark theme
-- Smooth animations and transitions
-- Responsive layout for all screen sizes
-- Intuitive navigation
-
-### 💿 Local Storage
-- All notes saved locally in your browser
-- No account required
-- Privacy-first approach
+### 📱 Responsive Layout
+- Desktop-optimized multi-column grid
+- Tablet-friendly two-column layout
+- Mobile-responsive single-column view
+- Smooth transitions and hover effects
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 16+ and npm/yarn
-- Modern web browser with Web Audio API support
+- Node.js 18+ and npm
+- Modern web browser
 
 ### Installation
 
@@ -82,98 +77,144 @@ npm run build
 
 The built files will be in the `dist` directory.
 
+## Methodology
+
+### Endogenous Analysis (Absolute Basis)
+
+**Endogenous Driver Analysis** focuses on a country's currency in isolation. The term "endogenous" originates from the Greek word "endo," meaning "coming from inside the system."
+
+#### Scoring System
+
+Each driver is analyzed and assigned a score (typically -10 for deflationary to +10 for inflationary):
+
+- **Positive scores**: Indicate inflationary conditions → Short currency bias
+- **Negative scores**: Indicate deflationary conditions → Long currency bias
+- **Extreme readings**: Often predict future policy reversals by central authorities
+
+#### Driver Categories
+
+1. **Surveys (Leading Indicators)**: Predict economic conditions and central bank reactions
+2. **Money Supply**: Tracks Federal Reserve's monetary lever (M2 growth analysis)
+3. **Interest Rates**: Reflects Fed's policy stance (lagging indicator)
+4. **Inflation**: Current price levels in the economy (coincident indicator)
+5. **Employment**: Labor market conditions (coincident indicator)
+6. **Central Authority**: Government and Fed actions affecting liquidity
+
+### Understanding the Score
+
+The overall Endogenous Score represents the cumulative effect of all drivers:
+
+- **Inflationary Score** (positive): Currency losing purchasing power → Short bias
+- **Deflationary Score** (negative): Currency gaining purchasing power → Long bias
+- **Score magnitude**: Indicates strength of the bias
+
 ## Usage
 
-### Creating a Recording
+### Dashboard Navigation
 
-1. Click "New Recording" button
-2. Grant microphone permissions when prompted
-3. Click "Start Recording" to begin
-4. During recording:
-   - Click "Add VoiceMark" to highlight important moments
-   - Add notes to describe what's important
-5. Click "Stop" when finished
-6. Choose a template (optional) for structured notes
-7. Click "Save Note" to process and save
+The dashboard presents data in a vertically-stacked layout:
 
-### Viewing Notes
+1. **Header Section**: Overall Endogenous Score, economic condition, and currency bias
+2. **Trend Chart**: 24-month historical view of the overall score
+3. **Driver Breakdown**: Categorized cards showing individual economic indicators
 
-1. Click "My Notes" to see all recordings
-2. Click on any note card to view details
-3. Use the audio player to listen back
-4. Click on transcript segments or VoiceMarks to jump to that time
-5. Edit the title by clicking the edit icon
-6. Export notes using the PDF, TXT, or CSV buttons
+### Interpreting Driver Cards
 
-### Managing Notes
+Each driver card displays:
+- **Current Value**: Latest reading with units
+- **Score**: Contribution to overall Endogenous Score
+- **Trend**: 24-month historical chart
+- **Bias Indicator**: Long/Short/Neutral classification
+- **Interpretation**: Analysis of what the reading means
 
-- Delete notes by clicking the trash icon on note cards
-- Notes are automatically saved to browser local storage
-- All data persists between sessions
+### Color Coding
+
+- **Navy Blue**: Surveys and Employment categories
+- **Burgundy**: Money Supply and Central Authority
+- **Purple**: Interest Rates
+- **Green**: Inflation Metrics
 
 ## Technology Stack
 
-- **Frontend Framework**: React 18
-- **Language**: TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
+- **Framework**: Next.js 14 (App Router)
+- **Frontend**: React 18.3
+- **Language**: TypeScript 5.3
+- **Styling**: Tailwind CSS 3.4
+- **Charts**: Recharts 2.12
 - **Icons**: Lucide React
-- **PDF Generation**: jsPDF
-- **Audio Recording**: Web Audio API / MediaRecorder API
 
 ## Architecture
 
 ```
 src/
+├── app/
+│   ├── layout.tsx           # Root layout with metadata
+│   ├── page.tsx             # Home page (Dashboard)
+│   └── globals.css          # Global styles (FT theme)
 ├── components/
-│   ├── Recorder.tsx          # Audio recording with VoiceMarks
-│   ├── NotesList.tsx         # Display all saved notes
-│   ├── NoteViewer.tsx        # View and play notes
-│   └── TemplateSelector.tsx  # Choose note templates
-├── utils/
-│   ├── ai.ts                 # Simulated AI transcription & summary
-│   └── export.ts             # Export functionality (PDF, TXT, CSV)
-├── types.ts                  # TypeScript interfaces
-├── App.tsx                   # Main application component
-├── main.tsx                  # Application entry point
-└── index.css                 # Global styles
+│   ├── Dashboard.tsx        # Main dashboard orchestration
+│   ├── EndogenousScore.tsx  # Prominent score display
+│   ├── ScoreHistoryChart.tsx # Overall trend visualization
+│   ├── CategorySection.tsx  # Driver category grouping
+│   ├── DriverCard.tsx       # Individual driver display
+│   └── HistoricalChart.tsx  # Reusable line chart
+├── data/
+│   └── sample-data.ts       # Sample endogenous data
+├── types/
+│   └── endogenous.ts        # TypeScript interfaces
+└── lib/                     # Utility functions
 ```
 
-## Features Comparison
+## Data Sources
 
-| Feature | HiNotes Original | This Clone |
-|---------|-----------------|------------|
-| Audio Recording | ✅ | ✅ |
-| VoiceMarks | ✅ | ✅ |
-| Transcription | ✅ (Real AI) | ✅ (Simulated) |
-| Speaker ID | ✅ | ✅ |
-| Templates | ✅ | ✅ |
-| Export (PDF/TXT/CSV) | ✅ | ✅ |
-| Cloud Sync | ✅ | ❌ (Local Only) |
-| Mobile App | ✅ | ❌ (Web Only) |
-| Real-time Collaboration | ✅ | ❌ |
-| Integration (Notion, etc.) | ✅ | ❌ |
+The current implementation uses **sample data** for demonstration purposes. In a production environment, you would integrate:
 
-## Browser Compatibility
+### Real-Time Data APIs
+- **Federal Reserve Economic Data (FRED)**: Free API for economic indicators
+- **Bureau of Labor Statistics (BLS)**: Employment and inflation data
+- **Institute for Supply Management (ISM)**: PMI data
+- **University of Michigan**: Consumer sentiment
+- **Treasury.gov**: Government debt and interest data
 
-- Chrome/Edge 85+
-- Firefox 80+
-- Safari 14+
-- Opera 70+
+### Implementation Example
 
-## Limitations
+```typescript
+// Example integration with FRED API
+async function fetchM2Data() {
+  const response = await fetch(
+    'https://api.stlouisfed.org/fred/series/observations?series_id=M2SL&api_key=YOUR_KEY'
+  );
+  const data = await response.json();
+  // Process and update dashboard
+}
+```
 
-This is a clone/demo application with simulated AI features:
-- Transcription is simulated with sample text
-- Speaker identification is randomized
-- AI summaries are template-based
-- No real speech-to-text processing
+## Customization
 
-For production use with real AI transcription, integrate services like:
-- OpenAI Whisper API
-- Google Cloud Speech-to-Text
-- AssemblyAI
-- AWS Transcribe
+### Adding New Drivers
+
+1. Define the driver in `src/types/endogenous.ts`
+2. Add data to `src/data/sample-data.ts`
+3. Update scoring logic if needed
+4. Driver cards will automatically render
+
+### Modifying Scoring Logic
+
+Edit the scoring interpretation in `sample-data.ts`:
+
+```typescript
+{
+  score: 8,  // Your calculated score
+  maxScore: 15,
+  bias: 'long',  // long | short | neutral
+}
+```
+
+### Styling Customization
+
+FT color scheme is defined in:
+- `tailwind.config.js`: Theme configuration
+- `src/app/globals.css`: CSS variables
 
 ## Contributing
 
@@ -191,13 +232,43 @@ MIT License - feel free to use this project for learning and development.
 
 ## Roadmap
 
-- [ ] Real AI transcription integration
-- [ ] Cloud storage and sync
-- [ ] Collaboration features
-- [ ] Mobile app (React Native)
-- [ ] Advanced search
-- [ ] Tags and categories
-- [ ] Integration with productivity tools
+- [ ] Real-time data integration with FRED API
+- [ ] Multi-currency support (EUR, GBP, JPY, etc.)
+- [ ] Comparative analysis (Exogenous/Relative Analysis)
+- [ ] Historical playback (analyze past dates)
+- [ ] Custom scoring models
+- [ ] Export reports (PDF/Excel)
+- [ ] Alert system for significant changes
+- [ ] AI-powered insights and predictions
+- [ ] Mobile-responsive enhancements
+- [ ] Dark mode toggle
+
+## Key Concepts
+
+### Inflationary vs Deflationary
+
+- **Inflationary Conditions**: Central authorities injecting money (QE, deficit spending, rate cuts)
+  - Result: Currency loses purchasing power → **Short Bias**
+
+- **Deflationary Conditions**: Central authorities withdrawing money (QT, surplus, rate hikes)
+  - Result: Currency gains purchasing power → **Long Bias**
+
+### Leading vs Lagging Indicators
+
+- **Leading**: Surveys predict future conditions → inform central bank reactions
+- **Coincident**: CPI, PPI, employment reflect current state
+- **Lagging**: Interest rates react to conditions already signaled
+
+## License
+
+MIT License - Free to use for learning and trading analysis.
+
+## Acknowledgments
+
+- Design inspiration: [Financial Times](https://www.ft.com)
+- Methodology: Forex trading Endogenous Analysis framework
+- Charts: [Recharts](https://recharts.org/)
+- Icons: [Lucide](https://lucide.dev/)
 
 ## Support
 
@@ -205,4 +276,4 @@ For issues and questions, please open an issue on GitHub.
 
 ---
 
-Built with ❤️ using React, TypeScript, and Vite
+Built with Next.js, React, TypeScript, and Tailwind CSS

@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ft-pink: #fff1e5;
+  --ft-cream: #fef9f0;
+  --ft-blue: #0f5499;
+  --ft-dark-blue: #094470;
+  --ft-red: #990f3d;
+  --ft-purple: #593380;
+  --ft-teal: #0d7680;
+  --ft-green: #4a7c59;
+  --ft-text: #33302e;
+  --ft-border: #cec6b9;
+}
+
+body {
+  font-family: 'MetricWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: var(--ft-cream);
+  color: var(--ft-text);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'FinancierDisplayWeb', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ft-serif {
+  font-family: 'FinancierDisplayWeb', Georgia, serif;
+}
+
+.ft-sans {
+  font-family: 'MetricWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
